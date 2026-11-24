@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark">TR</div>
+    <div>
+      <h1>Token Radar</h1>
+      <p class="tag">Which pre-token protocol is worth farming next — and what to do about it.</p>
+    </div>
+  </div>
+  <dl class="meta" id="meta"></dl>
+</header>
+
+<nav class="controls" aria-label="Filter the board">
+  <label class="field">Search
+    <input id="q" type="search" placeholder="Name or slug…" autocomplete="off">
+  </label>
+  <label class="field">Category
+    <select id="category"><option value="">All categories</option></select>
+  </label>
+  <label class="field">Chain
+    <select id="chain"><option value="">All chains</option></select>
+  </label>
+  <label class="check"><input id="watchlistOnly" type="checkbox"> Watchlist only</label>
+  <span class="count" id="count"></span>
+</nav>
+
+<main>
+  <section class="panel" aria-label="Ranked board">
+    <div class="panel-head">
+      <h2>Ranked board</h2>
+      <p class="hint">Click a column to sort. Click a row for its detail view and farm plan.</p>
+    </div>
+    <div class="table-wrap">
+      <table id="board">
+        <thead>
+          <tr>
+            <th data-sort="rank" class="num">#</th>
+            <th data-sort="name">Protocol</th>
+            <th data-sort="tvl_usd" class="num">TVL</th>
+            <th data-sort="change_7d" class="num">7d</th>
+            <th data-sort="age_days" class="num">Age</th>
+            <th data-sort="implied_value_usd" class="num">Implied value</th>
+            <th data-sort="multiple" class="num">× multiple</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="note" id="boardNote"></p>
+  </section>
+
+  <section class="panel detail" id="detail" aria-label="Protocol detail" hidden>
+    <div class="panel-head">
+      <h2 id="detailName">Protocol</h2>
+      <button id="detailClose" type="button">Close ×</button>
+    </div>
+    <div id="detailBody"></div>
+  </section>
+
+  <section class="panel" aria-label="How the radar prices a token">
+    <div class="panel-head"><h2>How the price is built</h2></div>
+    <p class="method" id="method"></p>
+    <div class="table-wrap">
+      <table id="multiples">
+        <thead><tr><th>Category</th><th class="num">Live sample</th><th class="num">Live median mcap / TVL</th><th class="num">Multiple used</th></tr></thead>
+        <tbody id="multipleRows"></tbody>
+      </table>
+    </div>
+    <p class="note">Multiples come from this snapshot's own live-token protocols: the median market-cap / TVL of the live names in each category (four or more names), else the whole market's median. Nothing here names a protocol in advance; the same function prices every row.</p>
+  </section>
+
+  <section class="panel" aria-label="Live tokens">
+    <div class="panel-head"><h2>Already trading — the market's own values</h2></div>
+    <p class="hint">These protocols already have a token, so the board never ranks them. Their market caps are shown here, not a model's claim.</p>
+    <div class="table-wrap">
+      <table id="live">
+        <thead><tr><th>Protocol</th><th class="num">Market cap</th><th class="num">TVL</th><th class="num">7d</th></tr></thead>
+        <tbody id="liveRows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p id="source"></p>
+  <p>Implied values are this radar's own claim, never the market's: a token's real price is whatever buyers pay when — and if — it launches.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
